@@ -1,77 +1,66 @@
 import Nav from "./components/Nav.tsx";
 import Mysidebar from "./components/Mysidebar.tsx";
-import UserTable from "./components/UserTable.tsx"; //
+import UserTable from "./components/UserTable.tsx";
 
 function Dashboard() {
-  const users = [
+  const stats = [
     {
-      name: " Users",
+      name: "Users",
       amt: "12,000",
-      Icon: (
-        <div className=" p-3 rounded-full text-[#DF18FF] bg-[rgba(224,24,255,0.10)] flex items-center justify-center">
-          <i className="fa-solid fa-users "></i>
-        </div>
-      ),
+      color: "text-[#DF18FF]",
+      bg: "bg-[rgba(224,24,255,0.1)]",
+      icon: "fa-users",
     },
     {
       name: "Active Users",
       amt: "5,200",
-      Icon: (
-        <div className=" p-3 rounded-full text-[#5718FF] bg-[rgba(87,24,255,0.10)] flex items-center justify-center">
-          <i className="fa-solid fa-user-group "></i>
-        </div>
-      ),
+      color: "text-[#5718FF]",
+      bg: "bg-[rgba(87,24,255,0.1)]",
+      icon: "fa-user-group",
     },
     {
       name: "Users with Loans",
       amt: "2,670",
-      Icon: (
-        <div className=" p-3 rounded-full text-[#F55F44] bg-[rgba(245,95,68,0.10)] flex items-center justify-center">
-          <i className="fa-brands fa-hive "></i>
-        </div>
-      ),
+      color: "text-[#F55F44]",
+      bg: "bg-[rgba(245,95,68,0.1)]",
+      icon: "fa-hive",
     },
     {
       name: "Users with Savings",
       amt: "120,000",
-      Icon: (
-        <div className=" p-3 rounded-full text-[#FF3366] bg-[rgba(255,51,102,0.10)] flex items-center justify-center">
-          <i className="fa-solid fa-coins "></i>
-        </div>
-      ),
+      color: "text-[#FF3366]",
+      bg: "bg-[rgba(255,51,102,0.1)]",
+      icon: "fa-coins",
     },
   ];
+
   return (
-    <div className="bg-slate-50">
+    <div className="bg-slate-50 min-h-screen">
       <Nav />
       <Mysidebar>
-        <section className="container mx-auto">
-          <div className="p-6">
-            <h2 className="font-medium text-md text-secondary text-3xl mb-10">
-              User
-            </h2>
+        <section className="p-4 md:p-10">
+          <h2 className="text-2xl font-semibold text-secondary mb-8">Users</h2>
 
-            <div className="grid grid-cols-4 gap-4">
-              {users.map((user) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {stats.map((stat) => (
+              <div
+                key={stat.name}
+                className="bg-white p-6 rounded-sm shadow-sm border border-gray-100 flex flex-col gap-3"
+              >
                 <div
-                  key={user.name}
-                  className="flex flex-col items-start px-7 py-4 bg-white rounded-sm shadow-lg gap-4"
+                  className={`w-10 h-10 rounded-full flex items-center justify-center ${stat.bg} ${stat.color}`}
                 >
-                  {user.Icon}
-                  <div className="flex flex-col gap-2">
-                    <h3 className="font-medium text-md uppercase text-secondary">
-                      {user.name}
-                    </h3>
-                    <p className="text-2xl font-semibold text-secondary">
-                      {user.amt}
-                    </p>
-                  </div>
+                  <i className={`fa-solid ${stat.icon}`}></i>
                 </div>
-              ))}
-            </div>
+                <h3 className="text-xs font-semibold uppercase text-secondary opacity-70">
+                  {stat.name}
+                </h3>
+                <p className="text-2xl font-bold text-secondary">{stat.amt}</p>
+              </div>
+            ))}
           </div>
 
-          <div className="bg-background">
+          <div className="mt-8 overflow-x-auto">
             <UserTable />
           </div>
         </section>

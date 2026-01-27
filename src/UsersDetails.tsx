@@ -82,39 +82,38 @@ const UsersDetails = () => {
 
           <Toaster position="top-center" reverseOrder={false} />
 
-          <div className="bg-white p-6 md:p-8 rounded-sm shadow-sm border border-gray-100 mb-6">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="flex items-center gap-5 md:border-r pr-8 border-gray-200">
-                <Avatar className="w-24 h-24">
+          {/* Inside UsersDetails.tsx */}
+          <div className="bg-white p-6 rounded-sm shadow-sm border border-gray-100 mb-6">
+            <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+              <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-5 lg:border-r lg:pr-8 border-gray-200 w-full lg:w-auto">
+                <Avatar className="w-20 h-20 md:w-24 md:h-24">
                   <AvatarImage src={profile} />
-                  <AvatarFallback>{user.username[0]}</AvatarFallback>
+                  <AvatarFallback>UN</AvatarFallback>
                 </Avatar>
                 <div>
                   <h2 className="text-xl font-bold text-secondary">
                     {user.personalInfo.fullname}
                   </h2>
-                  <p className="text-sm text-secondary opacity-70 mt-1">
-                    {user.id}
-                  </p>
+                  <p className="text-sm text-secondary opacity-70">{user.id}</p>
                 </div>
               </div>
 
-              <div className="md:border-r px-8 border-gray-200 text-center">
+              <div className="lg:border-r px-8 border-gray-200 text-center w-full lg:w-auto">
                 <p className="text-sm text-secondary font-medium">
                   User's Tier
                 </p>
-                <div className="flex gap-1 mt-2 text-yellow-500">
+                <div className="flex justify-center gap-1 mt-2 text-yellow-500">
                   <Star size={16} fill="currentColor" />
                   <Star size={16} className="text-gray-300" />
                   <Star size={16} className="text-gray-300" />
                 </div>
               </div>
 
-              <div className="px-8">
+              <div className="px-8 text-center lg:text-left w-full lg:w-auto">
                 <h2 className="text-xl font-bold text-secondary">
-                  {user.education.monthlyIncome.split(" - ")[0]}
+                  ₦200,000.00
                 </h2>
-                <p className="text-xs text-secondary mt-1 uppercase font-medium">
+                <p className="text-xs text-secondary mt-1">
                   9912345678 / Providus Bank
                 </p>
               </div>

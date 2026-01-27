@@ -17,14 +17,6 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   Table,
   TableBody,
   TableCell,
@@ -59,72 +51,73 @@ export function DataTable<TData, TValue>({
   const pageCount = table.getPageCount();
 
   return (
-    <div className="overflow-hidden rounded-md border bg-white">
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableHead key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
-                </TableHead>
+    <div className="w-full">
+      <div className="rounded-md border bg-white overflow-x-auto">
+        <div className="min-w-[800px]">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
+                    </TableHead>
+                  ))}
+                </TableRow>
               ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id}>
-                {row.getVisibleCells().map((cell) => (
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
                   <TableCell
-                    key={cell.id}
-                    className="py-4 text-secondary/60 text-md font-medium hover:text-secondary capitalize"
+                    colSpan={columns.length}
+                    className="h-24 text-center"
                   >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    No results.
                   </TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
 
-      {/* --- PAGINATION CONTROLS --- */}
-      <div className="flex flex-col md:flex-row items-center justify-between px-6 py-6 gap-4">
-        <div className="flex items-center gap-2 text-secondary/60 text-sm">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 py-4">
+        <div className="flex items-center gap-2 text-sm text-secondary">
           <span>Showing</span>
-          <Select
-            value={`${table.getState().pagination.pageSize}`}
-            onValueChange={(value) => table.setPageSize(Number(value))}
+          <select
+            className="bg-[#213f7d1a] p-2 rounded-md font-bold outline-none"
+            value={table.getState().pagination.pageSize}
+            onChange={(e) => table.setPageSize(Number(e.target.value))}
           >
-            <SelectTrigger className="w-[80px] bg-[#213f7d1a] border-none font-medium text-secondary">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent align="start">
-              <SelectGroup>
-                <SelectItem value="10">10</SelectItem>
-                <SelectItem value="25">25</SelectItem>
-                <SelectItem value="50">50</SelectItem>
-                <SelectItem value="100">100</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+            {[10, 20, 50, 100].map((size) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </select>
           <span>out of {data.length}</span>
         </div>
 
-        <Pagination className="justify-end w-auto mx-0">
+        <Pagination className="justify-center md:justify-end">
           <PaginationContent>
             <PaginationItem>
               <Button
@@ -137,10 +130,8 @@ export function DataTable<TData, TValue>({
               </Button>
             </PaginationItem>
 
-            {/* Simple Page Indicator */}
-            <div className="flex items-center gap-1">
-              {table.getPageOptions().map((pageIdx) => {
-                // Showing first 3 and last page logic for cleaner UI
+            <div className="hidden sm:flex items-center">
+              {Array.from({ length: pageCount }).map((_, pageIdx) => {
                 if (
                   pageIdx === 0 ||
                   pageIdx === pageCount - 1 ||
