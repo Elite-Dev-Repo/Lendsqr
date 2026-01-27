@@ -1,95 +1,223 @@
+"use client";
+
 import Nav from "./components/Nav.tsx";
 import Mysidebar from "./components/Mysidebar.tsx";
 import { MoveLeft } from "lucide-react";
 import profile from "./assets/profile.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-const Users = () => {
+import toast, { Toaster } from "react-hot-toast";
+
+const DetailSection = ({
+  title,
+  details,
+}: {
+  title?: string;
+  details: { label: string; value: string }[];
+}) => (
+  <div className="py-8 border-b border-gray-100 last:border-b-0">
+    <h2 className="text-secondary font-semibold text-[16px] mb-6">
+      {title ? title : ""}
+    </h2>
+    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-8 gap-x-4">
+      {details.map((item, idx) => (
+        <div key={idx} className="flex flex-col gap-2">
+          <span className="text-[12px] text-secondary opacity-70 uppercase font-normal">
+            {item.label}
+          </span>
+          <span className="text-[14px] text-secondary font-medium wrap-break-word">
+            {item.value}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+function Users() {
+  // Re-structured data for easier mapping
+  const UserInfo1 = [
+    {
+      title: "Personal Information",
+      details: [
+        { label: "FULL NAME", value: "Elite DEV" },
+        { label: "PHONE NUMBER", value: "07060780922" },
+        { label: "EMAIL ADDRESS", value: "elitedeveloper@gmail.com" },
+        { label: "BVN", value: "09167686804" },
+        { label: "GENDER", value: "Male" },
+        { label: "MARITAL STATUS", value: "Single" },
+        { label: "CHILDREN", value: "None" },
+        { label: "TYPE OF RESIDENCE", value: "Private Apartment" },
+      ],
+    },
+  ];
+
+  const UserInfo2 = [
+    {
+      title: "Education and Employment",
+      details: [
+        { label: "LEVEL OF EDUCATION", value: "B.Sc" },
+        { label: "EMPLOYMENT STATUS", value: "Employed" },
+        { label: "SECTOR OF EMPLOYMENT", value: "FinTech" },
+        { label: "DURATION OF EMPLOYMENT", value: "2 years" },
+        { label: "OFFICE EMAIL", value: "elitedeveloper@lendsqr.com" },
+        { label: "MONTHLY INCOME", value: "₦200,000.00 - ₦400,000.00" },
+        { label: "LOAN REPAYMENT", value: "40,000" },
+      ],
+    },
+  ];
+
+  const UserInfo3 = [
+    {
+      title: "Socials",
+      details: [
+        { label: "TWITTER", value: "@elite_developer" },
+        { label: "FACEBOOK", value: "Elite DEV" },
+        { label: "INSTAGRAM", value: "@elite_developer" },
+      ],
+    },
+  ];
+
+  const UserInfo4 = [
+    {
+      title: "Guarantor",
+      details: [
+        { label: "FULL NAME", value: "Debby Ogana" },
+        { label: "PHONE NUMBER", value: "07060780922" },
+        { label: "EMAIL ADDRESS", value: "debby@gmail.com" },
+        { label: "RELATIONSHIP", value: "Sister" },
+      ],
+    },
+    {
+      details: [
+        { label: "FULL NAME", value: "Debby Ogana" },
+        { label: "PHONE NUMBER", value: "07060780922" },
+        { label: "EMAIL ADDRESS", value: "debby@gmail.com" },
+        { label: "RELATIONSHIP", value: "Sister" },
+      ],
+    },
+  ];
+
+  // Reusable Component for Sections to keep code clean
+
   return (
-    <div className="bg-slate-50">
+    <div className="bg-slate-50 min-h-screen">
+      <Toaster position="top-center" reverseOrder={false} />
       <Nav />
       <Mysidebar>
         <section className="container mx-auto p-6">
           <header>
-            <h2 className="flex items-center text-[1.2em] gap-2 text-secondary font-medium">
-              <MoveLeft /> Back to Users
+            <h2 className="flex items-center text-[14px] gap-2 text-secondary font-normal cursor-pointer hover:underline">
+              <MoveLeft size={16} /> Back to Users
             </h2>
           </header>
 
-          <div className="flex items-center justify-between mt-6">
-            <h2 className="text-2xl font-medium text-secondary">
+          <div className="flex items-center justify-between mt-8">
+            <h2 className="text-2xl font-semibold text-secondary">
               User Details
             </h2>
-
-            <div className="flex gap-2 items-center">
-              <button className="px-4 py-2 rounded-sm border border-red-500 text-red-500 uppercase text-[12px] font-semibold">
+            <div className="flex gap-4 items-center">
+              <button
+                className="px-5 py-2 rounded-md border border-red-500 text-red-500 uppercase text-[12px] font-bold tracking-wider hover:bg-red-50 transition-colors"
+                onClick={() => toast.success("User Blacklisted")}
+              >
                 Blacklist User
               </button>
-              <button className="px-4 py-2 rounded-sm border border-primary text-primary uppercase text-[12px] font-semibold">
+              <button
+                className="px-5 py-2 rounded-md border border-primary text-primary uppercase text-[12px] font-bold tracking-wider hover:bg-teal-50 transition-colors"
+                onClick={() => toast.success("User Activated")}
+              >
                 Activate User
               </button>
             </div>
           </div>
-          <div className="bg-background p-6 rounded-sm w-full mt-4 relative shadow-sm">
-            <div className="flex mb-5">
-              <div className="flex items-center gap-4 border-r border-border px-4">
-                <Avatar size="xl">
-                  <AvatarImage src={profile} />
-                  <AvatarFallback>PfP</AvatarFallback>
-                </Avatar>
 
-                <div className="flex flex-col">
-                  <h2 className="text-secondary font-medium text-[1.2em]">
+          {/* User Profile Header Card */}
+          <div className="bg-white p-6 rounded-sm w-full mt-6 shadow-sm border border-gray-100 relative">
+            <div className="flex flex-wrap items-center gap-8 mb-10">
+              <div className="flex items-center gap-4 pr-8 border-r border-gray-200">
+                <Avatar className="h-24 w-24">
+                  <AvatarImage src={profile} />
+                  <AvatarFallback>GE</AvatarFallback>
+                </Avatar>
+                <div>
+                  <h2 className="text-secondary font-bold text-2xl">
                     Elite DEV
                   </h2>
-                  <p className="text-[.8em] text-secondary">@elite_developer</p>
+                  <p className="text-[14px] text-secondary">@elite_developer</p>
                 </div>
               </div>
-              <div className="flex flex-col justify-center gap-2 border-r border-border px-4 ">
-                <h3 className="text-secondary font-medium">User's Tier</h3>
-                <span className="flex items-center gap-1 text-[12px]">
+
+              <div className="flex flex-col gap-1 px-8 border-r border-gray-200">
+                <h3 className="text-secondary text-[14px] font-medium">
+                  User's Tier
+                </h3>
+                <span className="flex items-center gap-1 text-[14px]">
                   <i className="fa-solid fa-star text-yellow-500"></i>
-                  <i className="fa-solid fa-star text-yellow-500"></i>
+                  <i className="fa-regular fa-star text-yellow-500"></i>
                   <i className="fa-regular fa-star text-yellow-500"></i>
                 </span>
               </div>
 
-              <div className="flex flex-col justify-center gap-2 border-r border-border px-4 ">
-                <h3 className="text-secondary font-medium">
-                  <i className="fa-solid fa-naira-sign"></i>
-                  1,803,064<span className="text-[15px] opacity-70">.81</span>
+              <div className="flex flex-col gap-1 px-8">
+                <h3 className="text-secondary font-bold text-2xl">
+                  ₦1,803,064.81
                 </h3>
-                <p className="text-[13px] text-secondary font-semibold">
+                <p className="text-[12px] text-secondary font-normal">
                   9167686804/Opay
                 </p>
               </div>
             </div>
-            <div className=" w-full absolute bottom-0">
-              <ul className="flex items-center justify-around">
-                <li className="text-secondary py-2 border-b-2 border-transparent hover:border-b-2 hover:border-primary hover:text-primary">
+
+            <div className="w-full">
+              <ul className="flex items-center justify-between max-w-4xl text-[14px] md:text-[16px]">
+                <li className="text-primary font-medium pb-2 border-b-2 border-primary cursor-pointer px-4">
                   General Details
                 </li>
-                <li className="text-secondary py-2 border-b-2 border-transparent hover:border-b-2 hover:border-primary hover:text-primary">
+                <li className="text-secondary opacity-70 pb-2 border-b-2 border-transparent hover:text-primary cursor-pointer px-4 transition-all">
                   Documents
                 </li>
-                <li className="text-secondary py-2 border-b-2 border-transparent hover:border-b-2 hover:border-primary hover:text-primary">
+                <li className="text-secondary opacity-70 pb-2 border-b-2 border-transparent hover:text-primary cursor-pointer px-4 transition-all">
                   Bank Details
                 </li>
-                <li className="text-secondary py-2 border-b-2 border-transparent hover:border-b-2 hover:border-primary hover:text-primary">
+                <li className="text-secondary opacity-70 pb-2 border-b-2 border-transparent hover:text-primary cursor-pointer px-4 transition-all">
                   Loans
                 </li>
-                <li className="text-secondary py-2 border-b-2 border-transparent hover:border-b-2 hover:border-primary hover:text-primary">
+                <li className="text-secondary opacity-70 pb-2 border-b-2 border-transparent hover:text-primary cursor-pointer px-4 transition-all">
                   Savings
                 </li>
-                <li className="text-secondary py-2 border-b-2 border-transparent hover:border-b-2 hover:border-primary hover:text-primary">
+                <li className="text-secondary opacity-70 pb-2 border-b-2 border-transparent hover:text-primary cursor-pointer px-4 transition-all">
                   App and System
                 </li>
               </ul>
             </div>
           </div>
+
+          {/* General Details Content Card */}
+          <div className="bg-white p-8 rounded-sm w-full mt-6 shadow-sm border border-gray-100">
+            <DetailSection
+              title={UserInfo1[0].title}
+              details={UserInfo1[0].details}
+            />
+            <DetailSection
+              title={UserInfo2[0].title}
+              details={UserInfo2[0].details}
+            />
+            <DetailSection
+              title={UserInfo3[0].title}
+              details={UserInfo3[0].details}
+            />
+            <DetailSection
+              title={UserInfo4[0].title}
+              details={UserInfo4[0].details}
+            />
+            <DetailSection
+              title={UserInfo4[1].title}
+              details={UserInfo4[1].details}
+            />
+          </div>
         </section>
       </Mysidebar>
     </div>
   );
-};
+}
 
 export default Users;

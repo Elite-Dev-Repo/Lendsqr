@@ -1,7 +1,13 @@
 "use client";
-
 import type { ColumnDef } from "@tanstack/react-table";
-import { ListFilter, MoreVertical } from "lucide-react";
+import { ListFilter } from "lucide-react";
+import { ActionCell } from "./ActionCell.tsx";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 
 export type Payment = {
   id: string;
@@ -17,17 +23,111 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "organization",
     header: () => (
-      <div className="flex items-center gap-2 text-secondary font-bold text-[12px]">
-        <span>ORGANIZATION</span>
-        <ListFilter size={14} className="cursor-pointer" />
+      <div className="flex items-center gap-2">
+        <span className="text-secondary font-bold text-[12px] uppercase">
+          Organization
+        </span>
+        <Popover>
+          <PopoverTrigger asChild>
+            <ListFilter size={14} className="cursor-pointer text-secondary" />
+          </PopoverTrigger>
+          <PopoverContent className="w-[270px] p-5 flex flex-col gap-4 shadow-xl border-border bg-white z-50">
+            {/* Organization Field */}
+            <div className="flex flex-col gap-2">
+              <label className="text-[14px] font-medium text-secondary">
+                Organization
+              </label>
+              <select className="border border-border rounded-md p-2 text-sm text-secondary outline-none bg-transparent h-10">
+                <option value="">Select</option>
+                <option value="Lendsqr">Lendsqr</option>
+                <option value="Irorun">Irorun</option>
+              </select>
+            </div>
+
+            {/* Username Field */}
+            <div className="flex flex-col gap-2">
+              <label className="text-[14px] font-medium text-secondary">
+                Username
+              </label>
+              <input
+                type="text"
+                placeholder="User"
+                className="border border-border rounded-md p-2 text-sm text-secondary outline-none h-10"
+              />
+            </div>
+
+            {/* Email Field */}
+            <div className="flex flex-col gap-2">
+              <label className="text-[14px] font-medium text-secondary">
+                Email
+              </label>
+              <input
+                type="email"
+                placeholder="Email"
+                className="border border-border rounded-md p-2 text-sm text-secondary outline-none h-10"
+              />
+            </div>
+
+            {/* Date Field */}
+            <div className="flex flex-col gap-2">
+              <label className="text-[14px] font-medium text-secondary">
+                Date
+              </label>
+              <input
+                type="date"
+                className="border border-border rounded-md p-2 text-sm text-secondary outline-none h-10"
+              />
+            </div>
+
+            {/* Phone Number Field */}
+            <div className="flex flex-col gap-2">
+              <label className="text-[14px] font-medium text-secondary">
+                Phone Number
+              </label>
+              <input
+                type="text"
+                placeholder="Phone Number"
+                className="border border-border rounded-md p-2 text-sm text-secondary outline-none h-10"
+              />
+            </div>
+
+            {/* Status Field */}
+            <div className="flex flex-col gap-2">
+              <label className="text-[14px] font-medium text-secondary">
+                Status
+              </label>
+              <select className="border border-border rounded-md p-2 text-sm text-secondary outline-none bg-transparent h-10">
+                <option value="">Select</option>
+                <option value="active">Active</option>
+                <option value="pending">Pending</option>
+                <option value="blacklisted">Blacklisted</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex items-center gap-3 mt-2">
+              <Button
+                variant="outline"
+                className="flex-1 border-secondary text-secondary hover:bg-slate-50 font-semibold"
+              >
+                Reset
+              </Button>
+              <Button className="flex-1 bg-primary text-white hover:bg-primary/90 font-semibold">
+                Filter
+              </Button>
+            </div>
+          </PopoverContent>
+        </Popover>
       </div>
     ),
   },
+  // ... rest of your columns remain the same (Username, Email, etc.)
   {
     accessorKey: "username",
     header: () => (
-      <div className="flex items-center gap-2 text-secondary font-bold text-[12px]">
-        <span>USERNAME</span>
+      <div className="flex items-center gap-2 text-secondary font-bold text-[12px] uppercase">
+        <span>Username</span>
         <ListFilter size={14} className="cursor-pointer" />
       </div>
     ),
@@ -35,8 +135,8 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "email",
     header: () => (
-      <div className="flex items-center gap-2 text-secondary font-bold text-[12px]">
-        <span>EMAIL</span>
+      <div className="flex items-center gap-2 text-secondary font-bold text-[12px] uppercase">
+        <span>Email</span>
         <ListFilter size={14} className="cursor-pointer" />
       </div>
     ),
@@ -44,8 +144,8 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "phone",
     header: () => (
-      <div className="flex items-center gap-2 text-secondary font-bold text-[12px]">
-        <span>PHONE NUMBER</span>
+      <div className="flex items-center gap-2 text-secondary font-bold text-[12px] uppercase">
+        <span>Phone Number</span>
         <ListFilter size={14} className="cursor-pointer" />
       </div>
     ),
@@ -53,8 +153,8 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "dateJoined",
     header: () => (
-      <div className="flex items-center gap-2 text-secondary font-bold text-[12px]">
-        <span>DATE JOINED</span>
+      <div className="flex items-center gap-2 text-secondary font-bold text-[12px] uppercase">
+        <span>Date Joined</span>
         <ListFilter size={14} className="cursor-pointer" />
       </div>
     ),
@@ -62,35 +162,11 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "status",
     header: () => (
-      <div className="flex items-center gap-2 text-secondary font-bold text-[12px]">
-        <span>STATUS</span>
+      <div className="flex items-center gap-2 text-secondary font-bold text-[12px] uppercase">
+        <span>Status</span>
         <ListFilter size={14} className="cursor-pointer" />
       </div>
     ),
-    cell: ({ row }) => {
-      const status = row.getValue("status") as string;
-
-      const statusStyles: Record<string, string> = {
-        Active: "bg-[#F3FCF6] text-[#39CD62]",
-        Pending: "bg-[#FDF7E5] text-[#E9B200]",
-        Blacklisted: "bg-[#FCE6EB] text-[#E4033B]",
-        Inactive: "bg-[#F5F5F7] text-[#545F7D]",
-      };
-
-      return (
-        <div className="flex items-center justify-between w-full pr-4">
-          <span
-            className={`px-3 py-1.5 rounded-full text-[12px] font-medium ${
-              statusStyles[status] || "bg-gray-100 text-gray-600"
-            }`}
-          >
-            {status}
-          </span>
-          <div className="p-2  hover:bg-primary/10 rounded-full flex items-center justify-center">
-            <MoreVertical size={18} className="text-secondary cursor-pointer" />
-          </div>
-        </div>
-      );
-    },
+    cell: ActionCell,
   },
 ];
