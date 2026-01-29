@@ -1,4 +1,3 @@
-import React from "react";
 import signin from "./assets/signin.svg";
 
 const Login = () => {

@@ -1,4 +1,3 @@
-import React from "react";
 import { columns, type Payment } from "./Columns";
 import { DataTable } from "./DataTable";
 import usersData from "../db.json";

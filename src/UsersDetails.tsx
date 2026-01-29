@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+
 import { useParams, useNavigate } from "react-router-dom";
 import { MoveLeft, Star } from "lucide-react";
 import Nav from "./components/Nav";
