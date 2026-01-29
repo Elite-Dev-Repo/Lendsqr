@@ -12,7 +12,7 @@ const Login = () => {
           </div>
 
           <div className="flex-1">
-            <form action="#" className="flex flex-col gap-5 w-[80%] ">
+            <form className="flex flex-col gap-5 w-[80%] ">
               <div className="flex flex-col gap-2 mb-6">
                 <h2 className="text-4xl font-bold text-secondary">Welcome!</h2>
                 <p className="text-sm text-muted-foreground">
