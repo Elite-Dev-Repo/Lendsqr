@@ -41,7 +41,10 @@ const Login = () => {
                 Forgot Password?
               </a>
               <button
-                onClick={() => navigate("/dashboard")}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/dashboard");
+                }}
                 className="bg-primary text-white uppercase w-full p-4 rounded-sm"
               >
                 Log In
