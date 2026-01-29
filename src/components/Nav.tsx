@@ -57,7 +57,7 @@ const Nav = () => {
             >
               <DropdownMenuItem className="cursor-pointer">
                 <BadgeCheckIcon className="mr-2 h-4 w-4" />{" "}
-                <a href="/users">Account</a>
+                <a href="/user">Account</a>
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer text-red-600 focus:text-red-600">
                 <LogOutIcon className="mr-2 h-4 w-4" /> Logout

@@ -1,4 +1,3 @@
-
 import {
   Sidebar as ShadSidebar,
   SidebarContent,
@@ -44,7 +43,7 @@ function Sidebar() {
     {
       label: "Users",
       icon: <Users />,
-      link: "/users",
+      link: "/user",
     },
     {
       label: "Guarantors",
