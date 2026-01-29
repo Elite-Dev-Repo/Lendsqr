@@ -143,7 +143,7 @@ function Sidebar() {
               <BriefcaseBusiness size={20} /> Switch Organization{" "}
               <ChevronDown size={16} />
             </h3>
-            <a href="dashboard">
+            <a href="/dashboard">
               <h3 className="flex items-center justify-start px-2 font-semibold gap-4 text-md opacity-50">
                 {" "}
                 <LayoutDashboard size={20} /> Dashboard{" "}
