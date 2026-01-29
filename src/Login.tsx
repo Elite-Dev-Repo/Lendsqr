@@ -1,6 +1,8 @@
 import signin from "./assets/signin.svg";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   return (
     <>
       <section className="h-screen w-screen">
@@ -10,7 +12,7 @@ const Login = () => {
           </div>
 
           <div className="flex-1">
-            <form action="/dashboard" className="flex flex-col gap-5 w-[80%] ">
+            <form action="#" className="flex flex-col gap-5 w-[80%] ">
               <div className="flex flex-col gap-2 mb-6">
                 <h2 className="text-4xl font-bold text-secondary">Welcome!</h2>
                 <p className="text-sm text-muted-foreground">
@@ -38,7 +40,10 @@ const Login = () => {
               <a href="#" className="text-primary uppercase">
                 Forgot Password?
               </a>
-              <button className="bg-primary text-white uppercase w-full p-4 rounded-sm">
+              <button
+                onClick={() => navigate("/dashboard")}
+                className="bg-primary text-white uppercase w-full p-4 rounded-sm"
+              >
                 Log In
               </button>
             </form>
