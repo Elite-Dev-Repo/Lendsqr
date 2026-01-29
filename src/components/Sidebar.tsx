@@ -163,7 +163,7 @@ function Sidebar() {
                     <SidebarMenuButton
                       asChild
                       className="text-secondary/50 hover:text-secondary px-4 hover:bg-secondary/5 py-5"
-                      onClick={() => navigate(item.link || "#")}
+                      onClick={() => navigate(item.link ? item.link : "#")}
                     >
                       <a href={item.link || "#"} className="px-2 ">
                         {item.icon}

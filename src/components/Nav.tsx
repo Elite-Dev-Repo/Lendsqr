@@ -1,6 +1,7 @@
 import logo from "../assets/logo.svg";
 import { Bell, ChevronDown, Search } from "lucide-react";
 import profile from "../assets/profile.png";
+import { useNavigate } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +12,7 @@ import { BadgeCheckIcon, LogOutIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Nav = () => {
+  const navigate = useNavigate();
   return (
     <header className="w-full h-[80px] sticky top-0 z-50 shadow-sm bg-white px-4 md:px-10">
       <nav className="h-full w-full flex items-center justify-between">
@@ -57,7 +59,7 @@ const Nav = () => {
             >
               <DropdownMenuItem className="cursor-pointer">
                 <BadgeCheckIcon className="mr-2 h-4 w-4" />{" "}
-                <a href="/user">Account</a>
+                <a onClick={() => navigate("/user")}>Account</a>
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer text-red-600 focus:text-red-600">
                 <LogOutIcon className="mr-2 h-4 w-4" /> Logout
