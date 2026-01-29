@@ -101,7 +101,7 @@ export function DataTable<TData, TValue>({
       </div>
 
       <div className="flex flex-col md:flex-row items-center justify-between gap-4 py-4">
-        <div className="flex items-center gap-2 text-sm text-secondary">
+        <div className="flex flex-1 items-center gap-2 text-sm text-secondary">
           <span>Showing</span>
           <select
             className="bg-[#213f7d1a] p-2 rounded-md font-bold outline-none"
@@ -117,7 +117,7 @@ export function DataTable<TData, TValue>({
           <span>out of {data.length}</span>
         </div>
 
-        <Pagination className="justify-center md:justify-end">
+        <Pagination className="flex-1 justify-center md:justify-end">
           <PaginationContent>
             <PaginationItem>
               <Button

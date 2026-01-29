@@ -11,6 +11,7 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
+import { useNavigate } from "react-router-dom";
 
 import {
   ChevronDown,
@@ -39,6 +40,9 @@ function Sidebar() {
     icon: React.ReactNode;
     link?: string;
   };
+
+  const navigate = useNavigate();
+
   const customers: cust[] = [
     {
       label: "Users",
@@ -159,6 +163,7 @@ function Sidebar() {
                     <SidebarMenuButton
                       asChild
                       className="text-secondary/50 hover:text-secondary px-4 hover:bg-secondary/5 py-5"
+                      onClick={() => navigate(item.link || "#")}
                     >
                       <a href={item.link || "#"} className="px-2 ">
                         {item.icon}
